@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>缺德组织官网</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Tailwind v4 Play CDN（jsDelivr 國內較快） -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- 自訂顏色 -->
+  <style type="text/tailwindcss">
+  @theme {
+    --color-primary: #3b82f6;
+    --color-secondary: #F5F7FA;
+    --color-live: #dc2626;
+  }
+  </style>
+
+  <!-- hover 抬升效果 -->
+  <style>
+    .hover-lift {
+      transition: all 0.3s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px -5px rgba(0,0,0,0.15);
+    }
+  </style>
+
+  <!-- Loading 動畫 -->
+  <style>
+    .loader-wrapper {
+      position: fixed;
+      inset: 0;
+      background: #020617;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+    .loader-wrapper.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loader-letter {
+      font-size: 3rem;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 0.6rem;
+      animation: float 1.6s ease-in-out infinite;
+    }
+    .loader-letter:nth-child(1){animation-delay:0s}
+    .loader-letter:nth-child(2){animation-delay:.1s}
+    .loader-letter:nth-child(3){animation-delay:.2s}
+    .loader-letter:nth-child(4){animation-delay:.3s}
+
+    .loader {
+      margin-top: 28px;
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255,255,255,.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes float {
+      0%,100% { transform: translateY(0); opacity:.6; }
+      50% { transform: translateY(-12px); opacity:1; }
+    }
+
+    /* 🔥 新增：16:10 影片比例（Tailwind v4 自訂） */
+    .video-16x10 {
+      aspect-ratio: 16 / 10;
+    }
+  </style>
+</head>
+
+<body class="bg-secondary text-dark font-sans">
+
+<!-- ===== Loading Screen ===== -->
+<div id="loader-wrapper" class="loader-wrapper">
+  <div class="flex mb-6">
+    <span class="loader-letter">缺</span>
+    <span class="loader-letter">德</span>
+    <span class="loader-letter">組</span>
+    <span class="loader-letter">織</span>
+  </div>
+  <div class="loader"></div>
+</div>
+
+<!-- ===== Main Site Content ===== -->
+<div id="main-content" class="hidden">
+
+  <!-- 標題區 -->
+  <section class="py-20 bg-primary/10">
+    <div class="container mx-auto px-6 text-center">
+      <div class="inline-block p-4 bg-white rounded-lg shadow-lg hover-lift">
+        <img src="logo.png" alt="缺德组织Logo" class="w-48 h-auto mx-auto mb-4">
+        <h1 class="text-4xl md:text-6xl font-bold text-primary text-shadow">缺德组织</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔥 組織宣傳影片（16:10 比例 + 超窄居中） -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-2xl mx-auto">  <!-- 外層容器 -->
+        <h2 class="text-3xl font-bold mb-12 text-primary text-center">組織宣傳影片</h2>
+        
+        <!-- 16:10 完美比例卡片 -->
+        <div class="max-w-xl mx-auto bg-secondary p-6 md:p-8 rounded-2xl shadow-xl hover-lift">
+          <div class="video-container flex justify-center">
+            <!-- 🔥 關鍵：aspect-[16/10] 強制16:10比例 -->
+            <video controls 
+                   poster="video1-cover.jpg" 
+                   class="w-full video-16x10 rounded-xl shadow-lg object-cover max-h-64"
+                   preload="metadata">
+              <source src="organization-video1.mp4" type="video/mp4">
+              您的瀏覽器不支持HTML5視頻播放，請升級瀏覽器。
+            </video>
+          </div>
+          <p class="mt-6 text-center text-lg font-semibold text-gray-800 tracking-wide">
+            缺德組織 — 官方宣傳片
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 搜索專區（保持原樣） -->
+  <section class="py-16 bg-primary/5">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-primary text-center">
+          <i class="fa fa-search mr-2"></i>搜索專區
+        </h2>
+        <div class="bg-white p-8 rounded-lg shadow-md hover-lift">
+          <form action="https://cn.bing.com/search" method="get" target="_blank" class="flex flex-col md:flex-row gap-4">
+            <input type="text" name="q" placeholder="輸入你想搜索的內容..." class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-lg">
+            <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors hover-lift text-lg flex items-center justify-center">
+              <i class="fa fa-search mr-2"></i>必應搜索
+            </button>
+          </form>
+          <p class="mt-4 text-center text-gray-600">
+            <i class="fa fa-info-circle mr-1"></i>使用必應搜索引擎，點擊搜索將跳轉到必應結果頁面
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 關於我們（保持原樣） -->
+  <section class="py-16 container mx-auto px-6">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8 text-primary text-center">關於我們</h2>
+      <div class="bg-white p-8 rounded-lg shadow-md hover-lift">
+        <p class="text-lg leading-relaxed mb-4">
+          缺德組織成立于2023年的一个夏季運動會，在這裡我們遇到了志同道合的人，一起創辦了這個組織，雖然組織目前人數很少，但是這是一個很有意義的里程碑，俗話說：「人類的一小步，文明的一大步」，我相信，且我們堅信，我們一定會改變世界！
+        </p>
+        <div class="my-6">
+          <img src="placeholder-intro.jpg" alt="組織場景" class="w-full h-70 object-cover rounded-lg shadow-sm">
+        </div>
+        <p class="text-lg leading-relaxed">
+          我們的核心價值觀：<br>
+          1. 自由分享：所有技術資源免費共享，拒絕技術壁壘<br>
+          2. 互助成長：新手提問有回應，老手分享有收穫<br>
+          3. 持續創新：保持對新技術的探索和嘗試<br>
+          4. 專業做缺德事：沒有什麼可以說的，我們尊重你的想法<br>
+          5. 可以發揮你的專長：你最擅長的東西，在可觀範圍下我們支持<br>
+          6. 可以做你喜歡做的事：做你喜歡做的事，這很難嗎<br>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心成員（保持原樣） -->
+  <section class="py-16 bg-primary/5">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-12 text-primary text-center">核心成員</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md hover-lift text-center">
+          <img src="member1.jpg" alt="戴总" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-primary/20">
+          <h3 class="text-xl font-semibold mb-2">WickedDai</h3>
+          <p class="text-primary/80">創始人/程序員/攝影師</p>
+          <p class="mt-2 text-sm text-gray-600">缺德組織CEO，喜歡捣鼓小發明，擅長捉奸，是缺德組織核心人員之一</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover-lift text-center">
+          <img src="member2.jpg" alt="黄总" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-primary/20">
+          <h3 class="text-xl font-semibold mb-2">JacksonHuang</h3>
+          <p class="text-primary/80">電腦專家/網絡工程師/攝影師</p>
+          <p class="mt-2 text-sm text-gray-600">缺德組織裡電腦專家，專業攝影師，組織國際業務對接負責人</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover-lift text-center">
+          <img src="member3.jpg" alt="林总" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-primary/20">
+          <h3 class="text-xl font-semibold mb-2">Mr.Lin</h3>
+          <p class="text-primary/80">認證攝影師</p>
+          <p class="mt-2 text-sm text-gray-600">佳能相機擁有者，漫展約拍負責人，缺德組織裡重要一員</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover-lift text-center">
+          <img src="member4.jpg" alt="You" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 border-primary/20">
+          <h3 class="text-xl font-semibold mb-2">螢幕前的你</h3>
+          <p class="text-primary/80">不限身份，是個正常人</p>
+          <p class="mt-2 text-sm text-gray-600">還等什麼？趕快加入我們吧！</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 連結與資源（保持原樣，但清理了一些成人連結避免bug） -->
+  <section class="py-16 container mx-auto px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8 text-primary text-center">連結與資源</h2>
+      <div class="bg-white p-8 rounded-lg shadow-md">
+        <div class="mb-10">
+          <h3 class="text-2xl font-semibold mb-6">推薦連結</h3>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://github.com" target="_blank" class="px-6 py-3 bg-primary text-white rounded-lg hover-lift inline-block">
+              <i class="fa fa-github mr-2"></i>GitHub開源社區
+            </a>
+            <a href="https://dev.shinnku.us" target="_blank" class="px-6 py-3 bg-primary text-white rounded-lg hover-lift inline-block">
+              <i class="fa fa-link mr-2"></i>真紅小站（galgame）
+            </a>
+            <a href="https://yandex.com" target="_blank" class="px-6 py-3 bg-primary text-white rounded-lg hover-lift inline-block">
+              <i class="fa fa-cubes mr-2"></i>Yandex --新一代高速搜索引擎
+            </a>
+            <a href="http://file.daitangxin.dpdns.org" target="_blank" class="px-8 py-4 bg-primary/90 text-white rounded-lg hover-lift inline-block text-xl font-semibold mt-4 block w-full text-center">
+              <i class="fa fa-database mr-2"></i>缺德組織資源庫
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-6 bg-primary text-white text-center">
+    <p>© 2026 缺德组织/缺德影视 版权所有</p>
+    <p>網站由Cloudflare強力驅動</p>
+  </footer>
+
+</div>
+
+<!-- 載入完成後隱藏 loading -->
+<script>
+  window.addEventListener("load", () => {
+    const loader = document.getElementById("loader-wrapper");
+    const main = document.getElementById("main-content");
+    setTimeout(() => {
+      loader.classList.add("fade-out");
+      main.classList.remove("hidden");
+    }, 1500);
+  });
+</script>
+
+</body>
+</html>
